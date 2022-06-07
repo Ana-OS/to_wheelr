@@ -1,5 +1,16 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+Warning.module_eval do
+  alias_method :original_warn, :warn
+
+  def warn(msg)
+    if msg.match?(/already initialized constant/)
+      raise msg
+    else
+      original_warn(msg)
+    end
+  end
+end
 
 ruby "2.7.2"
 
@@ -32,7 +43,8 @@ gem "redis", "~> 4.0"
 gem 'faker'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
-
+gem 'devise'
+gem "net-http"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -53,7 +65,6 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'httparty'
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem "webmock"
@@ -75,4 +86,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'shoulda-matchers'
 end
