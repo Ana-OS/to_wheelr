@@ -1,4 +1,8 @@
 class Bicycle < ApplicationRecord
   belongs_to :user
-  validates :name, :location, :price_day, :brand, :number_wheels, :bicycle_type, :foldable, presence: true
+  has_many :reviews
+  validates :name, :location, :price_day, :brand, :number_wheels, :bicycle_type, presence: true
+  validates :foldable, inclusion: { in: [true, false]}
+  validates :bicycle_type, inclusion: { in: %w(tandem regular monocycle tricycle elliptical)}
+  validates :number_wheels, :price_day, numericality: { only_integer: true }
 end

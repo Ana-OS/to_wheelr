@@ -5,8 +5,8 @@ FactoryBot.define do
     location {"Austin"}
     price_day {40}
     number_wheels {2}
-    bicycle_type {"tandem"}
-    foldable {[true, false].sample}
+    bicycle_type {%w(tandem regular monocycle tricycle elliptical).sample}
+    foldable {false}
     user
   end
 end
