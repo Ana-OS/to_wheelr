@@ -1,16 +1,16 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-Warning.module_eval do
-  alias_method :original_warn, :warn
+# Warning.module_eval do
+#   alias_method :original_warn, :warn
 
-  def warn(msg)
-    if msg.match?(/already initialized constant/)
-      raise msg
-    else
-      original_warn(msg)
-    end
-  end
-end
+#   def warn(msg)
+#     if msg.match?(/already initialized constant/)
+#       raise msg
+#     else
+#       original_warn(msg)
+#     end
+#   end
+# end
 
 ruby "2.7.2"
 
@@ -53,7 +53,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
+gem 'rexml', '~> 3.2', '>= 3.2.4'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -65,9 +65,9 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'database_cleaner'
   gem 'rspec-rails'
   gem "webmock"
+  gem 'database_cleaner'
 end
 
 group :development do
