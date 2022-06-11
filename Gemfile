@@ -68,6 +68,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem "webmock"
   gem 'database_cleaner'
+  gem "json_matchers"
 end
 
 group :development do
