@@ -1,0 +1,1 @@
+json.bicycle @bicycle

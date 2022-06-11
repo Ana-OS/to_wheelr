@@ -1,0 +1,16 @@
+{
+  "id": "file:/show.json#",
+  "type": "object",
+  "required": ["id", "name", "brand", "price_day", "bicycle_type", "location", "number_wheels"],
+  "properties": {
+    "id": { "type" : "integer" },
+    "name": { "type" : "string" },
+    "brand": { "type" : "string" },
+    "location": { "type" : "string" },
+    "bicycle_type": { "type" : "string" },
+    "number_wheels": { "type" : "integer" },
+    "price_day": { "type" : "integer" },
+    "foldable": { "type" : "boolean" },
+    "user": { "type" : "string" }
+  }
+}

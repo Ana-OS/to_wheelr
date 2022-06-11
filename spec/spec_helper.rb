@@ -15,7 +15,7 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'webmock/rspec'
-
+require "json_matchers/rspec"
 
 RSpec.configure do |config|
 
