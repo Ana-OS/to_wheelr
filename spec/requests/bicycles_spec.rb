@@ -91,7 +91,6 @@ RSpec.describe "Bicycles", type: :request do
       sign_in(@user)
       @bicycle["name"] += " -updated"
       patch "/api/v1/bicycles/#{@bicycle.id}", params: {bicycle: @bicycle.attributes}
-      p json
       expect(json).to match_json_schema("bicycle")
     end
 
@@ -103,5 +102,22 @@ RSpec.describe "Bicycles", type: :request do
     end
   end
 
+  context "DELETE bicycle" do
+    before do
+      @bicycle = FactoryBot.create(:bicycle)
+      @user = FactoryBot.build(:user)
+    end
 
+    it "returns status code 204" do
+      sign_in(@user)
+      delete "/api/v1/bicycles/#{@bicycle.id}"
+      expect(response.status).to eq(204)
+    end
+
+    it "does not allow delete if user is not logged in" do
+      sign_out(@user)
+      delete "/api/v1/bicycles/#{@bicycle.id}"
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
 end
