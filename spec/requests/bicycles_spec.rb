@@ -67,4 +67,41 @@ RSpec.describe "Bicycles", type: :request do
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
+
+  context "PATCH edit/update" do
+    before do
+      @bicycle  = FactoryBot.create(:bicycle)
+      @user = FactoryBot.build(:user)
+    end
+
+    it "updates bicycle if user is logged in" do
+      sign_in(@user)
+      @bicycle["name"] += " -updated"
+      patch "/api/v1/bicycles/#{@bicycle.id}", params: {bicycle: @bicycle.attributes}
+      expect(response).to have_http_status(:created)
+    end
+
+    it "does not update if user is not logged in" do
+      @bicycle["name"] += " -updated"
+      patch "/api/v1/bicycles/#{@bicycle.id}", params: {bicycle: @bicycle.attributes}
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "returns the correct json" do
+      sign_in(@user)
+      @bicycle["name"] += " -updated"
+      patch "/api/v1/bicycles/#{@bicycle.id}", params: {bicycle: @bicycle.attributes}
+      p json
+      expect(json).to match_json_schema("bicycle")
+    end
+
+    it "does not update with invalid parameters" do
+      sign_in(@user)
+      @bicycle["name"] = nil
+      patch "/api/v1/bicycles/#{@bicycle.id}", params: {bicycle: @bicycle.attributes}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
+
 end
