@@ -41,4 +41,30 @@ RSpec.describe "Bicycles", type: :request do
       # expect(response).to have_http_status(:success)
     end
   end
+
+  context "POST /bicycle" do
+    before do
+      @bicycle_params = attributes_for(:bicycle)
+      @user1 = FactoryBot.build(:user)
+    end
+
+    it 'returns a created status' do
+      sign_in(@user1)
+      post "/api/v1/bicycles", params: {bicycle: @bicycle_params}
+      expect(response).to have_http_status(:created)
+    end
+
+    it 'does not allow to create a bicycle without a logged in user' do
+      sign_out(@user1)
+      post "/api/v1/bicycles", params: {bicycle: @bicycle_params}
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'does not allow to create a bicycle without required params' do
+      sign_in(@user1)
+      @bicycle_params[:name] = ""
+      post "/api/v1/bicycles", params: {bicycle: @bicycle_params}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
 end
