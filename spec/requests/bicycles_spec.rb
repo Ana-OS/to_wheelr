@@ -9,7 +9,7 @@ RSpec.describe "Bicycles", type: :request do
     end
 
     it "returns the correct json" do
-      expect(response).to match_json_schema("index")
+      expect(response).to match_json_schema("bicycles")
     end
 
     it "is returns a non empty array" do
@@ -26,16 +26,19 @@ RSpec.describe "Bicycles", type: :request do
     end
   end
 
-  # context "GET /show" do
-  #   before { get '/api/v1/bicycles/:id' }
+  context "GET /show" do
+    before do
+      bici = FactoryBot.create(:bicycle)
+      get "/api/v1/bicycles/#{bici.id}"
+    end
 
-  #   it "returns the correct json" do
-  #     expect(json).to match_json_schema("index")
-  #   end
+    it "returns the correct json" do
+      expect(json).to match_json_schema("bicycle")
+    end
 
-  #   it "responds with a 200 status" do
-  #     expect(response.status).to match(200)
-  #     # expect(response).to have_http_status(:success)
-  #   end
-  # end
+    it "responds with a 200 status" do
+      expect(response.status).to match(200)
+      # expect(response).to have_http_status(:success)
+    end
+  end
 end

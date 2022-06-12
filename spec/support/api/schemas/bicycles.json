@@ -1,0 +1,10 @@
+{
+ "type": "array",
+ "definitions": {
+   "bicycle": {
+      "items": {
+        "$ref": "file:/bicycle.json#"
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
-  "id": "file:/show.json#",
+  "id": "file:/bicycle.json#",
   "type": "object",
+  "required": ["id", "name", "brand", "price_day", "bicycle_type", "location", "number_wheels"],
   "properties": {
     "id": { "type" : "integer" },
     "name": { "type" : "string" },

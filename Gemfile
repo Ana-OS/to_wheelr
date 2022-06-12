@@ -68,7 +68,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem "webmock"
   gem 'database_cleaner'
-  gem "json_matchers"
 end
 
 group :development do
@@ -88,4 +87,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'shoulda-matchers'
+  gem "json_matchers"
 end
