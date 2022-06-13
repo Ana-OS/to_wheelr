@@ -15,7 +15,7 @@
 require 'faker'
 puts "destroyin bicycles"
 Bicycle.destroy_all
-
+User.destroy_all
 users = []
 5.times do
   user = User.new(email: Faker::Internet.email, password: SecureRandom.hex(6) )
@@ -33,7 +33,11 @@ end
     bicycle_type: %w(tandem regular monocycle tricycle elliptical).sample,
     foldable: [true, false].sample
   )
+
   bici.user = users.sample
   bici.save!
+  (1 + rand(4)).times do
+    bici.reviews.create!(rating: rand(1..5), comment: Faker::Lorem.sentence(word_count: 5), user: users.sample)
+  end
 end
 puts "done, created #{Bicycle.count} bicis"

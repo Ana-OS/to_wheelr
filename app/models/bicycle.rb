@@ -1,6 +1,6 @@
 class Bicycle < ApplicationRecord
   belongs_to :user
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   validates :name, :location, :price_day, :brand, :number_wheels, :bicycle_type, presence: true
   validates :foldable, inclusion: { in: [true, false]}
   validates :bicycle_type, inclusion: { in: %w(tandem regular monocycle tricycle elliptical)}
