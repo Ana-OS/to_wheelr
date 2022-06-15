@@ -1,6 +1,7 @@
 class Api::V1::ReviewsController < ApplicationController
   before_action :set_bicycle, only: [:index, :new, :create]
-  before_action :set_review, only: [:show, :new, :create, :destroy]
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @reviews = Review.all
   end
@@ -14,7 +15,7 @@ class Api::V1::ReviewsController < ApplicationController
     if @review.save
       render :show, status: :created
     else
-      render json: @bicycle.errors, status: :unprocessable_entity
+      render json: @review.errors, status: :unprocessable_entity
     end
   end
 

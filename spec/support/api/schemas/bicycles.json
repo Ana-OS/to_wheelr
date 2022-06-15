@@ -1,7 +1,7 @@
 {
- "type": "array",
- "definitions": {
-   "bicycle": {
+  "type": "array",
+  "definitions": {
+    "bicycle": {
       "items": {
         "$ref": "file:/bicycle.json#"
       }
