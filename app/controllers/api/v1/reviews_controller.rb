@@ -21,7 +21,7 @@ class Api::V1::ReviewsController < ApplicationController
 
   def update
     if  @review.update(review_params)
-      render :show, status: :created
+      render :show, status: :ok
     else
       render json: @review.errors, status: :unprocessable_entity
     end

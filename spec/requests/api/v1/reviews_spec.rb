@@ -41,7 +41,7 @@ RSpec.describe "Api::V1::Reviews", type: :request do
     end
   end
 
-  context "POST /review" do
+  context "POST review" do
     before do
       @review_params = attributes_for(:review)
       @bicycle = FactoryBot.create(:bicycle)
@@ -64,6 +64,33 @@ RSpec.describe "Api::V1::Reviews", type: :request do
       sign_in(@user1)
       @review_params[:rating] = nil
       post "/api/v1/bicycles/#{@bicycle.id}/reviews", params: {review: @review_params}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
+  context "PATCH review" do
+    before do
+      @review = FactoryBot.create(:review)
+      @user1 = FactoryBot.build(:user)
+    end
+
+    it 'returns a ok status' do
+      sign_in(@user1)
+      @review[:comment] += "- updated"
+      patch "/api/v1/reviews/#{@review.id}", params: {review: @review.attributes}
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'does not allow to update a review without a logged in user' do
+      sign_out(@user1)
+      patch "/api/v1/reviews/#{@review.id}", params: {review: @review.attributes}
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'does not allow to create a review without required params' do
+      sign_in(@user1)
+      @review[:rating] = nil
+      patch "/api/v1/reviews/#{@review.id}", params: {review: @review.attributes}
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end

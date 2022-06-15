@@ -78,7 +78,7 @@ RSpec.describe "Bicycles", type: :request do
       sign_in(@user)
       @bicycle["name"] += " -updated"
       patch "/api/v1/bicycles/#{@bicycle.id}", params: {bicycle: @bicycle.attributes}
-      expect(response).to have_http_status(:created)
+      expect(response).to have_http_status(:ok)
     end
 
     it "does not update if user is not logged in" do

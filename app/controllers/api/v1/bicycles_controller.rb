@@ -19,7 +19,7 @@ class Api::V1::BicyclesController < Api::V1::BaseController
 
   def update
     if  @bicycle.update(bicycle_params)
-      render :show, status: :created
+      render :show, status: :ok
     else
       render json: @bicycle.errors, status: :unprocessable_entity
     end
