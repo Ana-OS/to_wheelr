@@ -1,0 +1,12 @@
+{
+  "id": "file:/review.json#",
+  "type": "object",
+  "required": ["id", "rating", "comment", "user_id", "bicycle_id"],
+  "properties": {
+    "id": { "type" : "integer" },
+    "rating": { "type" : "string" },
+    "comment": { "type" : "string" },
+    "user_id": { "type" : "integer" },
+    "bicycle_id": { "type" : "integer" }
+  }
+}

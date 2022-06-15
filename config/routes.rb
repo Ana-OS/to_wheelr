@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root "api/v1/bicycles#index", defaults: { format: :json }
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :bicycles
+      resources :bicycles do
+        resources :reviews, only: [:show, :new, :create]
+      end
+      resources :reviews, only: [:index, :destroy, :edit, :update]
     end
   end
 
