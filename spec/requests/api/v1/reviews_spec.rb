@@ -73,7 +73,6 @@ RSpec.describe "Api::V1::Reviews", type: :request do
       @review = FactoryBot.create(:review)
       @user1 = FactoryBot.build(:user)
     end
-
     it 'returns a ok status' do
       sign_in(@user1)
       @review[:comment] += "- updated"
@@ -92,6 +91,24 @@ RSpec.describe "Api::V1::Reviews", type: :request do
       @review[:rating] = nil
       patch "/api/v1/reviews/#{@review.id}", params: {review: @review.attributes}
       expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
+   context "DELETE review" do
+    before do
+      @review = FactoryBot.create(:review)
+      @user = FactoryBot.build(:user)
+    end
+
+    it "returns a 204" do
+      sign_in(@user)
+      delete "/api/v1/reviews/#{@review.id}"
+      expect(response.status).to match(204)
+    end
+
+    it "does not allow deletion without a signed in user" do
+      delete "/api/v1/reviews/#{@review.id}"
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end
