@@ -1,0 +1,12 @@
+{
+  "id": "file:/review.json#",
+  "type": "array",
+  "definitions": {
+    "review": {
+      "items": {
+        "$ref": "file:/review.json#"
+      }
+    }
+  }
+}
+

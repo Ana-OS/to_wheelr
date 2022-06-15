@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :bicycles do
-        resources :reviews, only: [:show, :new, :create]
+        resources :reviews, only: [:index, :show, :new, :create]
       end
-      resources :reviews, only: [:index, :destroy, :edit, :update]
+      resources :reviews, only: [:destroy, :edit, :update]
     end
   end
 

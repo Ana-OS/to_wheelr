@@ -1,4 +1,6 @@
 class Api::V1::ReviewsController < ApplicationController
+  before_action :set_bicycle, only: [:index, :new, :create]
+  before_action :set_review, only: [:show, :new, :create, :destroy]
   def index
     @reviews = Review.all
   end
@@ -7,7 +9,7 @@ class Api::V1::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    @bicyle = Bicycle.find(params[:bicycle_ids])
+    @review.bicycle = @bicycle
     @review.user = current_user
     if @review.save
       render :show, status: :created
@@ -38,5 +40,8 @@ class Api::V1::ReviewsController < ApplicationController
 
   def set_review
     @review = Review.find(params[:id])
+  end
+  def set_bicycle
+    @bicycle = Bicycle.find(params[:bicycle_id])
   end
 end
