@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # route requests that dont match any api route to the root path
+  # route other requests to the root path
   get "*path", to: "pages#index", via: :all
 end
