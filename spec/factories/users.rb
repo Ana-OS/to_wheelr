@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :user do
-    email {Faker::Internet.email}
-    password {123456}
+    name { Faker::Name.name }
+    password_digest { 123456 }
+    email {Faker::Internet.email }
 
     transient do
       qtt_bicycles {2}
