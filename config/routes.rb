@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:create, :show, :update]
   # route other requests to the root path
   get "*path", to: "pages#index", via: :all
 end
