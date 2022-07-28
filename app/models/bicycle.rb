@@ -1,4 +1,5 @@
 class Bicycle < ApplicationRecord
+  belongs_to :user
   has_one_attached :photo
   has_many :reviews, dependent: :destroy
   validates :name, :location, :price_day, :brand, :number_wheels, :bicycle_type, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_07_194851) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_28_202504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_07_194851) do
     t.boolean "foldable"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_bicycles_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -60,10 +62,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_07_194851) do
     t.bigint "bicycle_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["bicycle_id"], name: "index_reviews_on_bicycle_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "user_name"
+    t.string "password_digest"
+    t.string "email"
+    t.string "image_url"
+    t.string "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "reviews", "bicycles"
+  add_foreign_key "reviews", "users"
 end

@@ -10,10 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
-  post "/signup", to: "users#create"
-  get "/me", to: "users#show"
-  post "/login", to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
+  # post "/signup", to: "users#create"
+  # get "/me", to: "users#show"
+  # post "/login", to: "sessions#create"
+  # delete "/logout", to: "sessions#destroy"
 
   # route other requests to the root path
   get "*path", to: "pages#index", via: :all
