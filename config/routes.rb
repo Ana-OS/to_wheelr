@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:create, :show, :update]
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+
   # route other requests to the root path
   get "*path", to: "pages#index", via: :all
 end
